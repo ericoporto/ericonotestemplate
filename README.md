@@ -1,4 +1,10 @@
-# Hyde Blogger Template
+# fork of Hyde Blogger Template
+
+I Érico forked the Hyde Blogger Template to modify for my own requirements on my blog, [ericonotes](https://ericonotes.blogspot.com), so not everything below applies.
+
+## below is original README
+
+---
 
 Hyde adapted into the Blogger from Jekyll. The Jekyll version is [here](https://github.com/poole/hyde). 
 
