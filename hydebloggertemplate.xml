@@ -720,7 +720,7 @@ max-height: 50px; border-radius:0}
 	}
 
 	function decoded(s) {
-		return decodeURIComponent(s.replace(pluses, ' '));
+		return decodeURIComponent(s.replace(pluses, &#39; &#39;));
 	}
 
 	var config = $.cookie = function (key, value, options) {
@@ -733,7 +733,7 @@ max-height: 50px; border-radius:0}
 				options.expires = -1;
 			}
 
-			if (typeof options.expires === 'number') {
+			if (typeof options.expires === &#39;number&#39;) {
 				var days = options.expires, t = options.expires = new Date();
 				t.setDate(t.getDate() + days);
 			}
@@ -741,21 +741,21 @@ max-height: 50px; border-radius:0}
 			value = config.json ? JSON.stringify(value) : String(value);
 
 			return (document.cookie = [
-				encodeURIComponent(key), '=', config.raw ? value : encodeURIComponent(value),
-				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-				options.path    ? '; path=' + options.path : '',
-				options.domain  ? '; domain=' + options.domain : '',
-				options.secure  ? '; secure' : ''
-			].join(''));
+				encodeURIComponent(key), &#39;=&#39;, config.raw ? value : encodeURIComponent(value),
+				options.expires ? &#39;; expires=&#39; + options.expires.toUTCString() : &#39;&#39;, // use expires attribute, max-age is not supported by IE
+				options.path    ? &#39;; path=&#39; + options.path : &#39;&#39;,
+				options.domain  ? &#39;; domain=&#39; + options.domain : &#39;&#39;,
+				options.secure  ? &#39;; secure&#39; : &#39;&#39;
+			].join(&#39;&#39;));
 		}
 
 		// read
 		var decode = config.raw ? raw : decoded;
-		var cookies = document.cookie.split('; ');
+		var cookies = document.cookie.split(&#39;; &#39;);
 		for (var i = 0, l = cookies.length; i &lt; l; i++) {
-			var parts = cookies[i].split('=');
+			var parts = cookies[i].split(&#39;=&#39;);
 			if (decode(parts.shift()) === key) {
-				var cookie = decode(parts.join('='));
+				var cookie = decode(parts.join(&#39;=&#39;));
 				return config.json ? JSON.parse(cookie) : cookie;
 			}
 		}
@@ -817,40 +817,49 @@ $(document).ready(function() {
     <div class='sidebar-about'>
       <h1>
         <a href='/'>
-          Hyde
+          Erico Notes
         </a>
       </h1>
-      <p class='lead'>A brazen <a href='http://blogger.com' target='_blank'>Blogger</a> theme. <a href='https://twitter.com/zaferzent' target='_blank'>@zaferzent</a>.</p>
-    </div>
+      <p class='lead'><a href='https://twitter.com/eri0o' target='_blank'>@eri0o</a></p>
+<p/>
+              <div class='search-form'>
+                <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' method='get'>
+                  <input expr:placeholder='data:title' id='s' name='q' type='search'/>
+                </form>
+              </div>
+              <style type='text/css'>
+                .search-form input[type=search] {
+                  border: 1px solid #d5d5d5;
+                  border-radius: 2px;
+                  width: 180px;
+                  min-height: 32px;
+                  padding: 4px 8px;
+                  font-size: 1.1em;
+                  font-weight: bold;
+                  outline: none;
+                }
+                .search-form input[type=search]:focus {
+                  border-color: #b5b5b5;
+                }
+                @media all and (max-width: 1012px) {
+                  .search-form {
+                    display: none;
+                  }
+                }
+              </style>
 
+    </div>
+<div><p/> </div>
     <nav class='sidebar-nav'>
       <a class='sidebar-nav-item active' href='/'>Home</a>
+      <a class='sidebar-nav-item' href='https://ericoporto.github.io'>About</a>
+      <a class='sidebar-nav-item' href='https://www.github.com/ericoporto'>GitHub</a>
+      <a class='sidebar-nav-item' href='https://ericonotes.blogspot.com/feeds/posts/default'>RSS feed</a>
 
-            <a class='sidebar-nav-item' href='/p/example-page.html'>Example Page</a>
-
-
-      <a class='sidebar-nav-item' href=''>Download</a>
-      <a class='sidebar-nav-item' href=''>GitHub project</a>
-      
-      <span class='sidebar-nav-item'>Jquery Cookie Theme Switcher</span>
-
-
-<ul class='cscheme'>
-    <li class='default' id='default'><a href=''/></li>
-    <li class='red' id='orange'><a href=''/></li>
-    <li class='yellow' id='blue'><a href=''/></li>
-    <li class='orange' id='green'><a href=''/></li>
-    <li class='green' id='rosse'><a href=''/></li>
-    <li class='cyan' id='dark'><a href=''/></li>
-    <li class='blue' id='mavi'><a href=''/></li>
-    <li class='magenta' id='mor'><a href=''/></li>
-    <li class='brown' id='kahve'><a href=''/></li>
-</ul>
-
-<a class='color-div' id='sright' value='s'>Sidebar Right</a>
     </nav>
+<div> <p/></div>
 
-    <p>&amp;copy; 2016. All rights reserved.</p>
+    <p>&amp;copy; 2018. All rights reserved.</p>
   </div>
 </div>
 
@@ -860,17 +869,20 @@ $(document).ready(function() {
 
 
             <b:section class='posts' id='site' showaddelement='yes'>
-              <b:widget id='Blog1' locked='true' title='Blog Kayıtları' type='Blog' version='1'>
+              <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
                 <b:widget-settings>
                   <b:widget-setting name='showDateHeader'>true</b:widget-setting>
                   <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
                   <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+                  <b:widget-setting name='authorLabel'>Author</b:widget-setting>
                   <b:widget-setting name='showCommentLink'>true</b:widget-setting>
                   <b:widget-setting name='style.urlcolor'>#008000</b:widget-setting>
                   <b:widget-setting name='showAuthor'>true</b:widget-setting>
                   <b:widget-setting name='style.linkcolor'>#0000ff</b:widget-setting>
                   <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
                   <b:widget-setting name='style.bgcolor'>#ffffff</b:widget-setting>
+                  <b:widget-setting name='timestampLabel'>in</b:widget-setting>
+                  <b:widget-setting name='reactionsLabel'>Reactions</b:widget-setting>
                   <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
                   <b:widget-setting name='style.layout'>1x1</b:widget-setting>
                   <b:widget-setting name='showLabels'>true</b:widget-setting>
@@ -880,6 +892,7 @@ $(document).ready(function() {
                   <b:widget-setting name='showBacklinks'>false</b:widget-setting>
                   <b:widget-setting name='style.bordercolor'>#ffffff</b:widget-setting>
                   <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+                  <b:widget-setting name='backlinksLabel'>Backlinks</b:widget-setting>
                   <b:widget-setting name='showReactions'>false</b:widget-setting>
                 </b:widget-settings>
                 <b:includable id='main' var='top'>
@@ -1879,6 +1892,146 @@ $(document).ready(function() {
                 
                 </b:includable>
               </b:widget>
+              <b:widget id='BlogArchive1' locked='false' title='Blog Archive' type='BlogArchive'>
+                <b:widget-settings>
+                  <b:widget-setting name='showStyle'>HIERARCHY</b:widget-setting>
+                  <b:widget-setting name='yearPattern'>yyyy</b:widget-setting>
+                  <b:widget-setting name='showWeekEnd'>true</b:widget-setting>
+                  <b:widget-setting name='monthPattern'>MMMM</b:widget-setting>
+                  <b:widget-setting name='dayPattern'>MMM dd</b:widget-setting>
+                  <b:widget-setting name='weekPattern'>MM/dd</b:widget-setting>
+                  <b:widget-setting name='chronological'>false</b:widget-setting>
+                  <b:widget-setting name='showPosts'>true</b:widget-setting>
+                  <b:widget-setting name='frequency'>MONTHLY</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2><data:title/></h2>
+  </b:if>
+  <div class='widget-content'>
+  <div id='ArchiveList'>
+  <div expr:id='data:widget.instanceId + &quot;_ArchiveList&quot;'>
+    <b:include cond='data:style == &quot;HIERARCHY&quot;' data='data' name='interval'/>
+    <b:include cond='data:style == &quot;FLAT&quot;' data='data' name='flat'/>
+    <b:include cond='data:style == &quot;MENU&quot;' data='data' name='menu'/>
+  </div>
+  </div>
+  <b:include name='quickedit'/>
+  </div>
+</b:includable>
+                <b:includable id='flat' var='data'>
+  <ul class='flat'>
+    <b:loop values='data:data' var='i'>
+      <li class='archivedate'>
+        <a expr:href='data:i.url'><data:i.name/></a> (<data:i.post-count/>)
+      </li>
+    </b:loop>
+  </ul>
+</b:includable>
+                <b:includable id='interval' var='intervalData'>
+  <b:loop values='data:intervalData' var='interval'>
+    <ul class='hierarchy'>
+      <li expr:class='&quot;archivedate &quot; + data:interval.expclass'>
+        <b:include cond='data:interval.toggleId' data='interval' name='toggle'/>
+        <a class='post-count-link' expr:href='data:interval.url'>
+          <data:interval.name/>
+        </a>
+        <span class='post-count' dir='ltr'>(<data:interval.post-count/>)</span>
+        <b:include cond='data:interval.data' data='interval.data' name='interval'/>
+        <b:include cond='data:interval.posts' data='interval.posts' name='posts'/>
+      </li>
+    </ul>
+  </b:loop>
+</b:includable>
+                <b:includable id='menu' var='data'>
+  <select expr:id='data:widget.instanceId + &quot;_ArchiveMenu&quot;'>
+    <option value=''><data:title/></option>
+    <b:loop values='data:data' var='i'>
+      <option expr:value='data:i.url'><data:i.name/> (<data:i.post-count/>)</option>
+    </b:loop>
+  </select>
+</b:includable>
+                <b:includable id='posts' var='posts'>
+  <ul class='posts'>
+    <b:loop values='data:posts' var='post'>
+      <li><a expr:href='data:post.url'><data:post.title/></a></li>
+    </b:loop>
+  </ul>
+</b:includable>
+                <b:includable id='toggle' var='interval'>
+  <a class='toggle' href='javascript:void(0)'>
+    <span expr:class='&quot;zippy&quot; + (data:interval.expclass == &quot;expanded&quot; ? &quot; toggle-open&quot; : &quot;&quot;)'>
+      <b:if cond='data:interval.expclass == &quot;expanded&quot;'>
+        &#9660;&#160;
+      <b:elseif cond='data:blog.languageDirection == &quot;rtl&quot;'/>
+        &#9668;&#160;
+      <b:else/>
+        &#9658;&#160;
+      </b:if>
+    </span>
+  </a>
+</b:includable>
+              </b:widget>
+              <b:widget id='Attribution1' locked='false' title='' type='Attribution'>
+                <b:widget-settings>
+                  <b:widget-setting name='copyright'/>
+                </b:widget-settings>
+                <b:includable id='main'>
+    <div class='widget-content' style='text-align: center;'>
+      <b:if cond='data:attribution != &quot;&quot;'>
+       <data:attribution/>
+      </b:if>
+    </div>
+
+    <b:include name='quickedit'/>
+  </b:includable>
+              </b:widget>
+              <b:widget id='Navbar1' locked='false' title='Navbar' type='Navbar'>
+                <b:includable id='main'>&lt;script type=&quot;text/javascript&quot;&gt;
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener(&#39;load&#39;,
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent(&#39;onload&#39;, function(){ object[attribute] = val; });
+      }
+    }
+  &lt;/script&gt;
+&lt;div id=&quot;navbar-iframe-container&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://apis.google.com/js/plusone.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+      gapi.load(&quot;gapi.iframes:gapi.iframes.style.bubble&quot;, function() {
+        if (gapi.iframes &amp;&amp; gapi.iframes.getContext) {
+          gapi.iframes.getContext().openChild({
+              url: &#39;https://www.blogger.com/navbar.g?targetBlogID\x3d3944831508482989817\x26blogName\x3dErico+Notes\x26publishMode\x3dPUBLISH_MODE_BLOGSPOT\x26navbarType\x3dDISABLED\x26layoutType\x3dLAYOUTS\x26searchRoot\x3dhttps://ericonotes.blogspot.com/search\x26blogLocale\x3den\x26v\x3d2\x26homepageUrl\x3dhttps://ericonotes.blogspot.com/\x26vt\x3d8665521583289194132&#39;,
+              where: document.getElementById(&quot;navbar-iframe-container&quot;),
+              id: &quot;navbar-iframe&quot;
+          });
+        }
+      });
+    &lt;/script&gt;&lt;script type=&quot;text/javascript&quot;&gt;
+(function() {
+var script = document.createElement(&#39;script&#39;);
+script.type = &#39;text/javascript&#39;;
+script.src = &#39;//pagead2.googlesyndication.com/pagead/js/google_top_exp.js&#39;;
+var head = document.getElementsByTagName(&#39;head&#39;)[0];
+if (head) {
+head.appendChild(script);
+}})();
+&lt;/script&gt;
+</b:includable>
+              </b:widget>
+              <b:widget id='HTML1' locked='false' title='Social Links' type='HTML' version='1'>
+                <b:widget-settings>
+                  <b:widget-setting name='content'>&lt;nav id=&quot;social&quot;&gt;&lt;a class=&quot;twitter&quot; href=&quot;https://twitter.com/eri0o&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Twitter&quot;&gt;&lt;i class=&quot;ion ion-social-twitter&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;github&quot; href=&quot;https://github.com/ericoporto&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Github&quot;&gt;&lt;i class=&quot;ion ion-social-github&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;a class=&quot;google-plus&quot; href=&quot;https://plus.google.com/+%C3%89ricoP&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; title=&quot;Google+&quot;&gt;&lt;i class=&quot;ion ion-social-googleplus&quot;/&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;/nav&gt;&lt;style type=&#39;text/css&#39;&gt;#HTML1 #social { position: absolute; right: 88px; top: 6.5px; } #HTML1 #social .ion { font-size: 32px; padding: 8px; } @media (max-width: 1012px) { #HTML1 #social { position: static; } } @media (max-width: 664px) { #HTML1 #social .ion { font-size: 24px; } }&lt;/style&gt;</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+              <data:content/>
+            </b:includable>
+              </b:widget>
             </b:section>
 
 
@@ -1889,65 +2042,65 @@ $(document).ready(function() {
 
 <script>
 
-var oldSrc = '//img1.blogblog.com/img/blank.gif'; //Default blogger image link
+var oldSrc = &#39;//img1.blogblog.com/img/blank.gif&#39;; //Default blogger image link
 
-var newSrc = 'https://3.bp.blogspot.com/-UNjtW9_9fcs/VrvrBJi_8CI/AAAAAAAABP4/jjFMkoCi6Ig/s1600/blank-user-avatar.png'; //New image link
+var newSrc = &#39;https://3.bp.blogspot.com/-UNjtW9_9fcs/VrvrBJi_8CI/AAAAAAAABP4/jjFMkoCi6Ig/s1600/blank-user-avatar.png&#39;; //New image link
 
-$('img[src="' + oldSrc + '"]').attr('src', newSrc);
+$(&#39;img[src=&quot;&#39; + oldSrc + &#39;&quot;]&#39;).attr(&#39;src&#39;, newSrc);
 
 </script>
 <script type='text/javascript'>
 // colors
-$("#orange").click(function(){
-    $("body").attr('class','theme-base-08');       
-    $.cookie("view_method","theme-base-08", {expires: 7, path: '/'});
+$(&quot;#orange&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;theme-base-08&#39;);       
+    $.cookie(&quot;view_method&quot;,&quot;theme-base-08&quot;, {expires: 7, path: &#39;/&#39;});
 });
-$("#green").click(function(){
-    $("body").attr('class','theme-base-09');
-    $.cookie("view_method","theme-base-09", {expires: 7, path: '/'});
+$(&quot;#green&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;theme-base-09&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;theme-base-09&quot;, {expires: 7, path: &#39;/&#39;});
 });
-$("#blue").click(function(){
-    $("body").attr('class','theme-base-0a');
-    $.cookie("view_method","theme-base-0a", {expires: 7, path: '/'});
+$(&quot;#blue&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;theme-base-0a&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;theme-base-0a&quot;, {expires: 7, path: &#39;/&#39;});
 });
-$("#rosse").click(function(){
-    $("body").attr('class','theme-base-0b');
-    $.cookie("view_method","theme-base-0b", {expires: 7, path: '/'});
+$(&quot;#rosse&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;theme-base-0b&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;theme-base-0b&quot;, {expires: 7, path: &#39;/&#39;});
 });
-$("#dark").click(function(){
-    $("body").attr('class','theme-base-0c');
-    $.cookie("view_method","theme-base-0c", {expires: 7, path: '/'});
-});
-
-$("#mavi").click(function(){
-    $("body").attr('class','theme-base-0d');
-    $.cookie("view_method","theme-base-0d", {expires: 7, path: '/'});
+$(&quot;#dark&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;theme-base-0c&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;theme-base-0c&quot;, {expires: 7, path: &#39;/&#39;});
 });
 
-$("#mor").click(function(){
-    $("body").attr('class','theme-base-0e');
-    $.cookie("view_method","theme-base-0e", {expires: 7, path: '/'});
+$(&quot;#mavi&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;theme-base-0d&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;theme-base-0d&quot;, {expires: 7, path: &#39;/&#39;});
 });
 
-$("#kahve").click(function(){
-    $("body").attr('class','theme-base-0f');
-    $.cookie("view_method","theme-base-0f", {expires: 7, path: '/'});
+$(&quot;#mor&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;theme-base-0e&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;theme-base-0e&quot;, {expires: 7, path: &#39;/&#39;});
 });
 
-$("#default").click(function(){
-    $("body").attr('class','');
-    $.cookie("view_method","", {expires: 7, path: '/'});
+$(&quot;#kahve&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;theme-base-0f&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;theme-base-0f&quot;, {expires: 7, path: &#39;/&#39;});
+});
+
+$(&quot;#default&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;&quot;, {expires: 7, path: &#39;/&#39;});
 });
 
 /* Sidebar Right */
-$("#sright").click(function(){
-    $("body").attr('class','layout-reverse');
-    $.cookie("view_method","layout-reverse", {expires: 7, path: '/'});
+$(&quot;#sright&quot;).click(function(){
+    $(&quot;body&quot;).attr(&#39;class&#39;,&#39;layout-reverse&#39;);
+    $.cookie(&quot;view_method&quot;,&quot;layout-reverse&quot;, {expires: 7, path: &#39;/&#39;});
 });
 
 $(function(){
-    if($.cookie("view_method")){
-        $("body").attr('class',$.cookie("view_method"));      
+    if($.cookie(&quot;view_method&quot;)){
+        $(&quot;body&quot;).attr(&#39;class&#39;,$.cookie(&quot;view_method&quot;));      
     }
 });
 
